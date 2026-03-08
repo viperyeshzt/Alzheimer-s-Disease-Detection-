@@ -1,20 +1,51 @@
-# Ignore datasets
+# ==============================
+# Dataset (large files)
+# ==============================
 Datasets/
 
-# Ignore trained models
+# ==============================
+# Machine Learning models
+# ==============================
 *.h5
 *.keras
 *.pt
 *.pth
+*.ckpt
 
-# Ignore python cache
+# ==============================
+# Python cache
+# ==============================
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
-# Ignore IDE files
+# ==============================
+# Virtual environments
+# ==============================
+venv/
+env/
+.venv/
+ENV/
+
+# ==============================
+# IDE files
+# ==============================
 .idea/
 .vscode/
 
-# Ignore virtual environment
-venv/
-.env
+# ==============================
+# Logs
+# ==============================
+*.log
+
+# ==============================
+# Jupyter Notebook
+# ==============================
+.ipynb_checkpoints/
+
+# ==============================
+# OS files
+# ==============================
+.DS_Store
+Thumbs.db
