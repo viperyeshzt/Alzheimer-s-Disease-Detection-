@@ -1,0 +1,20 @@
+# Ignore datasets
+Datasets/
+
+# Ignore trained models
+*.h5
+*.keras
+*.pt
+*.pth
+
+# Ignore python cache
+__pycache__/
+*.pyc
+
+# Ignore IDE files
+.idea/
+.vscode/
+
+# Ignore virtual environment
+venv/
+.env
