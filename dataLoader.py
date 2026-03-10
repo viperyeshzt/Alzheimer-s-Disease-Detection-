@@ -1,61 +1,47 @@
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.applications.efficientnet import preprocess_input
 
-# -----------------------------------
-# Dataset Path
-# -----------------------------------
-dataset_path = "C:/Users/HP/OneDrive/Desktop/Alzheimer/Datasets/archive (1)/OriginalDataset"
+# Paths
+train_path = "C:\\Users\\HP\\OneDrive\\Desktop\\Alzheimer\\Datasets\\archive (1)\\AugmentedAlzheimerDataset"
+val_path = "C:\\Users\\HP\\OneDrive\\Desktop\\Alzheimer\\Datasets\\archive (1)\\OriginalDataset"
 
-# -----------------------------------
-# Training Data Generator
-# -----------------------------------
+# Training generator
 train_datagen = ImageDataGenerator(
     preprocessing_function=preprocess_input,
-    validation_split=0.2,
-    rotation_range=15,
-    zoom_range=0.15,
-    width_shift_range=0.05,
-    height_shift_range=0.05,
+    rotation_range=25,
+    zoom_range=0.2,
+    width_shift_range=0.1,
+    height_shift_range=0.1,
+    shear_range=0.1,
     horizontal_flip=True,
     fill_mode="nearest"
 )
 
-# -----------------------------------
-# Validation Data Generator
-# -----------------------------------
+# Validation generator
 val_datagen = ImageDataGenerator(
-    preprocessing_function=preprocess_input,
-    validation_split=0.2
+    preprocessing_function=preprocess_input
 )
 
-# -----------------------------------
-# Load Training Data
-# -----------------------------------
+# Training data
 train_data = train_datagen.flow_from_directory(
-    dataset_path,
-    target_size=(224, 224),
-    batch_size=32,
+    train_path,
+    target_size=(224,224),
+    batch_size=16,
     class_mode="categorical",
-    subset="training",
     shuffle=True
 )
 
-# -----------------------------------
-# Load Validation Data
-# -----------------------------------
+# Validation data
 val_data = val_datagen.flow_from_directory(
-    dataset_path,
-    target_size=(224, 224),
-    batch_size=32,
+    val_path,
+    target_size=(224,224),
+    batch_size=16,
     class_mode="categorical",
-    subset="validation",
     shuffle=False
 )
 
-# -----------------------------------
-# Dataset Information
-# -----------------------------------
-print("\nDataset Loaded Successfully")
-print("Number of Training Images:", train_data.samples)
-print("Number of Validation Images:", val_data.samples)
-print("Class Labels:", train_data.class_indices)
+print("Training Images:", train_data.samples)
+print("Validation Images:", val_data.samples)
+print("Classes:", train_data.class_indices)
+
+print("viper and emmu")

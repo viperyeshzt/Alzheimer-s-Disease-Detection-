@@ -16,7 +16,7 @@ print("Number of Validation Images:", val_data.samples)
 print("Class Labels:", train_data.class_indices)
 
 # -----------------------------------
-# Compute Class Weights (for imbalance)
+# Compute Class Weights (handle imbalance)
 # -----------------------------------
 labels = train_data.classes
 
@@ -37,12 +37,12 @@ print("Computed Class Weights:", class_weights)
 # Stop training if validation stops improving
 early_stop = EarlyStopping(
     monitor="val_loss",
-    patience=5,
+    patience=7,
     restore_best_weights=True,
     verbose=1
 )
 
-# Save the best model automatically
+# Save best model
 checkpoint = ModelCheckpoint(
     "best_alzheimer_model.keras",
     monitor="val_accuracy",
@@ -50,7 +50,7 @@ checkpoint = ModelCheckpoint(
     verbose=1
 )
 
-# Reduce learning rate if validation loss stops improving
+# Reduce learning rate automatically
 reduce_lr = ReduceLROnPlateau(
     monitor="val_loss",
     factor=0.3,
@@ -66,6 +66,8 @@ history = model.fit(
     train_data,
     validation_data=val_data,
     epochs=25,
+    steps_per_epoch=800,
+    validation_steps=200,
     class_weight=class_weights,
     callbacks=[early_stop, checkpoint, reduce_lr],
     verbose=1
