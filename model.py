@@ -56,3 +56,4 @@ model.compile(
 
 # Show architecture
 model.summary()
+print("model loaded succesfullly")
